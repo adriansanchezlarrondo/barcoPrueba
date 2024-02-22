@@ -26,7 +26,7 @@ export const panel = {
                 if (panel.matriz[i][j] == 0) {
                     divCelda += `<button id="${i}${j}" class="celda bg-dark bg-gradient border-secondary"></button>`
                 } else if (panel.matriz[i][j] > 0) {
-                    divCelda += `<button id="${i}${j}" data-barco="${i}${j}" class="celda bg-primary bg-gradient border-secondary"></button>`
+                    divCelda += `<button id="${i}${j}" data-barco="${i}${j}" class="celda bg-dark bg-gradient border-secondary"></button>`
                 }
 
                 divFila += divCelda
@@ -70,9 +70,13 @@ export const panel = {
         console.log('btnBarcoID', btnBarcoID);
 
         if (btnBarcoID) {
-            
+            console.log('Has acertado en la posición', btnBarcoID)
+            btnCelda.classList.remove('bg-dark')
+            btnCelda.classList.add('bg-danger')
         } else {
             console.log('No has hecho clic en un barco.');
+            btnCelda.classList.remove('bg-dark')
+            btnCelda.classList.add('bg-primary')
         }
     }
 }
