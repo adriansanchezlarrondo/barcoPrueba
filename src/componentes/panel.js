@@ -17,29 +17,30 @@ export const panel = {
         const idPanel = document.querySelector('#panel')
         idPanel.innerHTML = ''
 
-        console.log('idBarco', panel.idBarco);
         for (let i = 0; i < panel.matriz.length; i++) {
-            let divFilas = '<div class="fila d-flex justify-content-center">'
+            let divFila = '<div class="fila d-flex justify-content-center">'
             
             for (let j = 0; j < panel.matriz[i].length; j++) {
                 let divCelda = ''
 
                 if (panel.matriz[i][j] == 0) {
-                    divCelda += '<div class="celda bg-primary bg-gradient border-secondary"></div>'
+                    divCelda += `<button id="${i}${j}" class="celda bg-dark bg-gradient border-secondary"></button>`
+                } else if (panel.matriz[i][j] > 0) {
+                    divCelda += `<button id="${i}${j}" data-barco="${i}${j}" class="celda bg-primary bg-gradient border-secondary"></button>`
                 }
 
-                if (panel.matriz[i][j] == 1) {
-                    divCelda += `<div id="${panel.idBarco}" class="celda bg-dark bg-gradient border-secondary"></div>`
-                }
-
-                divFilas += divCelda
+                divFila += divCelda
 
             }
-            divFilas += '</div>'
-            idPanel.innerHTML += divFilas
+            divFila += '</div>'
+            idPanel.innerHTML += divFila
         }
+
+        const celdas = document.querySelectorAll('.celda');
+        celdas.forEach(celda => {
+            celda.addEventListener('click', panel.verificarBarco);
+        });
     },
-    idBarco: 0,
     pintaBarcos: () => {
 
         for (let i = 0; i < barcos.length; i++) {
@@ -54,9 +55,6 @@ export const panel = {
                 for (let k = 0; k < filaBarco.length; k++) {
                     if (filaBarco[k] === 1) {
                         panel.matriz[randomPositionY + j][randomPositionX + k] = 1;
-                        
-                        panel.idBarco += 1
-                        console.log('idBarco', panel.idBarco);
                     }
                 }
 
@@ -65,4 +63,16 @@ export const panel = {
 
         panel.pintaPanel()
     },
+    verificarBarco: (event) => {
+        const btnCelda = event.target;
+        console.log('celda', btnCelda);
+        const btnBarcoID = btnCelda.dataset.barco;
+        console.log('btnBarcoID', btnBarcoID);
+
+        if (btnBarcoID) {
+            
+        } else {
+            console.log('No has hecho clic en un barco.');
+        }
+    }
 }
