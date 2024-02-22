@@ -2,11 +2,9 @@ export const header = {
     template: // html
         `
       <nav class="navbar navbar-light bg-dark">
-        <div class="container-fluid">
-          <div class="mx-auto">
-            <button class="btn btn-success mx-2 fs-4">HOME</button>
-            <button class="btn btn-success mx-2 fs-4">RANKING</button>
-            <button class="btn btn-success mx-2 fs-4">JUEGO</button>
+        <div class="container-fluid py-3">
+          <div class="mx-auto bg-primary rounded-3 px-4 py-2">
+            <h1 class="my-auto">BATALLA NAVAL</h1>  
           </div>
         </div>
       </nav>

@@ -24,9 +24,9 @@ export const panel = {
                 let divCelda = ''
 
                 if (panel.matriz[i][j] == 0) {
-                    divCelda += `<button id="${i}${j}" class="celda bg-dark bg-gradient border-secondary"></button>`
-                } else if (panel.matriz[i][j] > 0) {
-                    divCelda += `<button id="${i}${j}" data-barco="${i}${j}" class="celda bg-dark bg-gradient border-secondary"></button>`
+                    divCelda += `<div id="${i}${j}" class="celda bg-dark bg-gradient border-secondary"></div>`
+                } else if (panel.matriz[i][j] ==     1) {
+                    divCelda += `<div id="${i}${j}" data-barco="${i}${j}" class="celda bg-dark bg-gradient border-secondary"></div>`
                 }
 
                 divFila += divCelda
@@ -41,11 +41,11 @@ export const panel = {
             celda.addEventListener('click', panel.verificarBarco);
         });
     },
-    pintaBarcos: () => {
+    insertaBarcos: () => {
 
         for (let i = 0; i < barcos.length; i++) {
             const barco = barcos[i];
-            console.log('barco', barco);
+            console.log('BARCOS', barco);
             const randomPositionX = Math.floor(Math.random() * (10 - barco[0].length)); // ANCHURA ARRAY
             const randomPositionY = Math.floor(Math.random() * (10 - barco.length));    // ALTURA ARRAY
 
@@ -62,21 +62,46 @@ export const panel = {
         }
 
         panel.pintaPanel()
+        // panel.pintaBarcos()
     },
     verificarBarco: (event) => {
         const btnCelda = event.target;
-        console.log('celda', btnCelda);
         const btnBarcoID = btnCelda.dataset.barco;
-        console.log('btnBarcoID', btnBarcoID);
 
         if (btnBarcoID) {
-            console.log('Has acertado en la posición', btnBarcoID)
+            console.log('TOCADO')
             btnCelda.classList.remove('bg-dark')
             btnCelda.classList.add('bg-danger')
         } else {
-            console.log('No has hecho clic en un barco.');
+            console.log('AGUA');
             btnCelda.classList.remove('bg-dark')
             btnCelda.classList.add('bg-primary')
+        }
+    },
+    pintaBarcos: () => {
+        const idPanelBarcos1 = document.querySelector('#panelBarcos1')
+        idPanelBarcos1.innerHTML = ''
+
+        for (let i = 0; i < barcos.length; i++) {
+            const barco = barcos[i];
+            let divFila = '<div class="fila d-flex justify-content-center">'
+
+            for (let j = 0; j < barco.length; j++) {
+                
+                const filaBarco = barco[j];
+                
+                for (let k = 0; k < filaBarco.length; k++) {
+                    let divCelda = ''
+                    if (filaBarco[k] === 1) {
+                        divCelda += `<div class="celda bg-dark bg-gradient border-secondary"></div>`
+                    }
+                    divFila += divCelda
+                }
+                
+            }
+            divFila += '</div>'
+            idPanelBarcos1.innerHTML += divFila
+
         }
     }
 }
